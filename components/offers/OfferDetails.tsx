@@ -26,10 +26,10 @@ export function OfferDetails({
       <div className="max-w-7xl mx-auto px-6">
         <ScrollReveal>
           <div className="text-center mb-16">
-            <span className="text-gold text-sm font-medium uppercase tracking-widest">
+            <span className="text-teal text-sm font-medium uppercase tracking-widest">
               {subtitle}
             </span>
-            <h2 className="font-heading text-3xl md:text-4xl font-bold mt-4">
+            <h2 className="font-heading text-3xl md:text-4xl font-bold mt-4 text-navy">
               {title}
             </h2>
           </div>
@@ -38,12 +38,12 @@ export function OfferDetails({
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {details.map((detail, i) => (
             <ScrollReveal key={detail.title} delay={i * 0.1}>
-              <div className="glass rounded-2xl p-6 h-full hover:border-gold/20 transition-all hover:glow-gold">
+              <div className="card rounded-2xl p-6 h-full transition-all">
                 <div className="text-2xl mb-4">{detail.icon}</div>
-                <h3 className="font-heading text-lg font-bold mb-2">
+                <h3 className="font-heading text-lg font-bold mb-2 text-navy">
                   {detail.title}
                 </h3>
-                <p className="text-cream/50 text-sm leading-relaxed">
+                <p className="text-slate text-sm leading-relaxed">
                   {detail.description}
                 </p>
               </div>
