@@ -5,37 +5,29 @@ import { ScrollReveal } from "@/components/ui/ScrollReveal";
 
 export function CTASection() {
   return (
-    <section className="py-32 relative overflow-hidden bg-cream">
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-teal/3 blur-[200px]" />
-
-      <div className="max-w-4xl mx-auto px-6 relative z-10">
+    <section className="py-28">
+      <div className="max-w-6xl mx-auto px-6">
         <ScrollReveal>
-          <div className="text-center">
-            <h2 className="font-heading text-4xl md:text-6xl font-bold mb-6 text-navy">
-              Prêt à reprendre le contrôle
-              <br />
-              <span className="gradient-text">
-                de votre protection sociale ?
-              </span>
-            </h2>
-            <p className="text-slate text-lg mb-12 max-w-2xl mx-auto">
-              En 3 minutes, notre audit flash évalue la conformité et la
-              performance de vos dispositifs. Résultats immédiats, rapport
-              détaillé offert.
-            </p>
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <Link
-                href="/outils"
-                className="inline-block px-10 py-5 bg-teal text-white font-bold rounded-full text-lg hover:bg-teal-light hover:shadow-xl hover:shadow-teal/10 transition-all hover:scale-105 active:scale-95"
-              >
-                Lancer le diagnostic gratuit →
-              </Link>
-              <Link
-                href="/contact"
-                className="px-10 py-5 border border-navy/10 text-navy font-medium rounded-full text-lg hover:border-teal/30 hover:text-teal transition-all"
-              >
-                Nous contacter
-              </Link>
+          <div className="bento p-12 md:p-20 text-center relative overflow-hidden">
+            {/* Subtle organic bg */}
+            <div className="absolute inset-0 blob-teal" />
+            <div className="absolute inset-0 blob-gold" />
+
+            <div className="relative z-10">
+              <h2 className="font-heading text-3xl md:text-[2.75rem] font-bold leading-tight text-navy mb-5">
+                Prêt à reprendre le contrôle ?
+              </h2>
+              <p className="text-gray-600 text-lg mb-10 max-w-lg mx-auto leading-relaxed">
+                En 3 minutes, notre audit flash évalue vos dispositifs. Résultats immédiats, rapport détaillé offert.
+              </p>
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
+                <Link href="/outils" className="px-8 py-4 bg-teal text-white font-semibold rounded-2xl text-[15px] hover:bg-teal-light hover:shadow-lg hover:shadow-teal/10 transition-all">
+                  Lancer le diagnostic gratuit →
+                </Link>
+                <Link href="/contact" className="px-8 py-4 bg-white text-navy font-medium rounded-2xl text-[15px] border border-gray-100 hover:border-gray-200 transition-all">
+                  Nous contacter
+                </Link>
+              </div>
             </div>
           </div>
         </ScrollReveal>

@@ -7,76 +7,74 @@ const offers = [
   {
     icon: "🛡️",
     title: "Prévoyance & Santé",
-    description:
-      "Adaptation pénibilité, absentéisme, démographie. Offre tarifaire compétitive et sur-mesure.",
+    text: "Audit, mise en concurrence, pilotage. Offre tarifaire compétitive adaptée à votre démographie.",
     href: "/prevoyance-sante",
+    span: "md:col-span-2",
+    bg: "blob-teal",
   },
   {
     icon: "💰",
     title: "Épargne Salariale",
-    description:
-      "PEE, PER, intéressement, participation. Simulation budgétaire, appel d'offres, rédaction d'accord.",
+    text: "PEE, PER, intéressement. Simulation budgétaire et rédaction d'accords.",
     href: "/epargne-salariale",
+    span: "",
+    bg: "blob-gold",
   },
   {
     icon: "⚖️",
-    title: "Consolidation AGIRC-ARRCO",
-    description:
-      "Taux dérogatoires, taux moyen pondéré, négociation caisses, accord d'entreprise.",
+    title: "AGIRC-ARRCO",
+    text: "Harmonisation des taux post-fusion, négociation caisses.",
     href: "/agirc-arrco",
+    span: "",
+    bg: "blob-green",
   },
   {
     icon: "👔",
     title: "Package Dirigeants",
-    description:
-      "Structures juridiques, statuts, mix rémunératoire, optimisation fiscale et sociale.",
+    text: "Optimisation fiscale et sociale, structures juridiques, mix rémunératoire.",
     href: "/package-dirigeants",
+    span: "",
+    bg: "blob-gold",
   },
   {
     icon: "🏁",
     title: "IFC",
-    description:
-      "Passif social, prévisionnel 10 ans, validation CAC, optimisation comptable.",
+    text: "Passif social, prévisionnel 10 ans, validation CAC, externalisation.",
     href: "/ifc",
+    span: "md:col-span-2",
+    bg: "blob-teal",
   },
 ];
 
 export function OffersGrid() {
   return (
-    <section className="py-32 relative bg-white">
-      <div className="max-w-7xl mx-auto px-6">
+    <section className="py-28">
+      <div className="max-w-6xl mx-auto px-6">
         <ScrollReveal>
-          <div className="text-center mb-20">
-            <span className="text-teal text-sm font-medium uppercase tracking-widest">
-              Nos expertises
-            </span>
-            <h2 className="font-heading text-4xl md:text-5xl font-bold mt-4 text-navy">
-              5 offres, <span className="gradient-text">une vision.</span>
+          <div className="max-w-2xl mb-16">
+            <div className="pill bg-gold/8 text-gold border border-gold/15 mb-6">Expertises</div>
+            <h2 className="font-heading text-3xl md:text-[2.75rem] font-bold leading-tight text-navy">
+              5 offres, une vision.
             </h2>
           </div>
         </ScrollReveal>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {offers.map((offer, i) => (
-            <ScrollReveal
-              key={offer.title}
-              delay={i * 0.1}
-              className={i === 4 ? "md:col-span-2 lg:col-span-1" : ""}
-            >
-              <Link href={offer.href} className="block group h-full">
-                <div className="h-full card rounded-2xl p-8 transition-all duration-300 hover:-translate-y-1">
-                  <div className="text-4xl mb-6">{offer.icon}</div>
-                  <h3 className="font-heading text-xl font-bold mb-3 text-navy group-hover:text-teal transition-colors">
-                    {offer.title}
+        {/* Bento Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          {offers.map((o, i) => (
+            <ScrollReveal key={o.title} delay={i * 0.08} className={o.span}>
+              <Link href={o.href} className="block group h-full">
+                <div className={`bento p-8 h-full relative ${o.bg}`}>
+                  <div className="text-3xl mb-5">{o.icon}</div>
+                  <h3 className="font-heading text-xl font-bold text-navy mb-2 group-hover:text-teal transition-colors">
+                    {o.title}
                   </h3>
-                  <p className="text-slate text-sm leading-relaxed mb-6">
-                    {offer.description}
-                  </p>
-                  <span className="text-teal text-sm font-medium flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                    En savoir plus
-                    <span className="transition-transform group-hover:translate-x-1">
-                      →
-                    </span>
+                  <p className="text-gray-600 text-[15px] leading-relaxed mb-4">{o.text}</p>
+                  <span className="text-teal text-[14px] font-medium inline-flex items-center gap-1.5 opacity-0 group-hover:opacity-100 transition-all">
+                    Découvrir
+                    <svg className="w-4 h-4 transition-transform group-hover:translate-x-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                    </svg>
                   </span>
                 </div>
               </Link>

@@ -5,7 +5,7 @@ import Link from "next/link";
 
 const navLinks = [
   {
-    label: "Nos Offres",
+    label: "Offres",
     children: [
       { label: "Prévoyance & Santé", href: "/prevoyance-sante" },
       { label: "Épargne Salariale", href: "/epargne-salariale" },
@@ -14,8 +14,8 @@ const navLinks = [
       { label: "IFC", href: "/ifc" },
     ],
   },
-  { label: "Outils & Simulateurs", href: "/outils" },
-  { label: "L'Équipe", href: "/equipe" },
+  { label: "Simulateurs", href: "/outils" },
+  { label: "Équipe", href: "/equipe" },
   { label: "Contact", href: "/contact" },
 ];
 
@@ -27,32 +27,28 @@ export function Navbar() {
 
   useEffect(() => {
     setMounted(true);
-    const onScroll = () => setScrolled(window.scrollY > 50);
+    const onScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         mounted ? "translate-y-0 opacity-100" : "-translate-y-full opacity-0"
-      } ${
-        scrolled
-          ? "bg-white/80 backdrop-blur-xl shadow-sm py-3 border-b border-navy/5"
-          : "bg-transparent py-5"
-      }`}
+      } ${scrolled ? "bg-white/90 backdrop-blur-xl border-b border-gray-100" : "bg-transparent"}`}
     >
-      <nav className="max-w-7xl mx-auto px-6 flex items-center justify-between">
-        <Link href="/" className="flex items-center gap-3 group">
-          <div className="w-10 h-10 rounded-lg bg-teal flex items-center justify-center font-heading text-white font-bold text-xl">
+      <nav className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+        <Link href="/" className="flex items-center gap-2.5 group">
+          <div className="w-8 h-8 rounded-xl bg-teal flex items-center justify-center text-white font-heading font-bold text-sm">
             E
           </div>
-          <span className="font-heading text-xl font-bold text-navy group-hover:text-teal transition-colors">
+          <span className="font-heading text-lg font-bold text-navy group-hover:text-teal transition-colors">
             Exiliance
           </span>
         </Link>
 
-        <div className="hidden lg:flex items-center gap-8">
+        <div className="hidden lg:flex items-center gap-1">
           {navLinks.map((link) =>
             link.children ? (
               <div
@@ -61,99 +57,57 @@ export function Navbar() {
                 onMouseEnter={() => setDropdownOpen(true)}
                 onMouseLeave={() => setDropdownOpen(false)}
               >
-                <button className="text-slate hover:text-teal transition-colors text-sm font-medium flex items-center gap-1">
+                <button className="px-4 py-2 rounded-xl text-gray-600 hover:text-navy hover:bg-gray-50 transition-all text-[15px] font-medium flex items-center gap-1">
                   {link.label}
-                  <svg
-                    className={`w-4 h-4 transition-transform ${dropdownOpen ? "rotate-180" : ""}`}
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
+                  <svg className={`w-3.5 h-3.5 transition-transform ${dropdownOpen ? "rotate-180" : ""}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                   </svg>
                 </button>
-                <div
-                  className={`absolute top-full left-0 mt-2 w-64 bg-white rounded-xl shadow-lg border border-navy/5 p-2 transition-all duration-200 ${
-                    dropdownOpen
-                      ? "opacity-100 translate-y-0 pointer-events-auto"
-                      : "opacity-0 translate-y-2 pointer-events-none"
-                  }`}
-                >
+                <div className={`absolute top-full left-0 mt-1 w-56 bg-white rounded-2xl shadow-lg border border-gray-100 p-1.5 transition-all duration-150 ${
+                  dropdownOpen ? "opacity-100 translate-y-0 pointer-events-auto" : "opacity-0 -translate-y-1 pointer-events-none"
+                }`}>
                   {link.children.map((child) => (
-                    <Link
-                      key={child.href}
-                      href={child.href}
-                      className="block px-4 py-3 rounded-lg text-sm text-slate hover:text-teal hover:bg-cream transition-all"
-                    >
+                    <Link key={child.href} href={child.href} className="block px-3.5 py-2.5 rounded-xl text-[14px] text-gray-600 hover:text-teal hover:bg-cream transition-all">
                       {child.label}
                     </Link>
                   ))}
                 </div>
               </div>
             ) : (
-              <Link
-                key={link.label}
-                href={link.href!}
-                className="text-slate hover:text-teal transition-colors text-sm font-medium"
-              >
+              <Link key={link.label} href={link.href!} className="px-4 py-2 rounded-xl text-gray-600 hover:text-navy hover:bg-gray-50 transition-all text-[15px] font-medium">
                 {link.label}
               </Link>
             )
           )}
-          <Link
-            href="/outils"
-            className="ml-4 px-6 py-2.5 bg-teal text-white font-semibold text-sm rounded-full hover:bg-teal-light hover:shadow-lg hover:shadow-teal/10 transition-all hover:scale-105"
-          >
-            Diagnostic Gratuit
+          <Link href="/outils" className="ml-3 px-5 py-2 bg-teal text-white text-[14px] font-semibold rounded-xl hover:bg-teal-light transition-all">
+            Diagnostic gratuit
           </Link>
         </div>
 
-        <button className="lg:hidden text-navy" onClick={() => setMobileOpen(!mobileOpen)}>
-          <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            {mobileOpen ? (
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-            ) : (
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-            )}
+        <button className="lg:hidden text-navy p-2 rounded-xl hover:bg-gray-50" onClick={() => setMobileOpen(!mobileOpen)}>
+          <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            {mobileOpen
+              ? <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              : <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />}
           </svg>
         </button>
       </nav>
 
-      <div
-        className={`lg:hidden bg-white shadow-lg mt-2 mx-4 rounded-xl overflow-hidden transition-all duration-300 border border-navy/5 ${
-          mobileOpen ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0 border-0"
-        }`}
-      >
-        <div className="p-4 space-y-2">
+      <div className={`lg:hidden bg-white border-b border-gray-100 overflow-hidden transition-all duration-200 ${mobileOpen ? "max-h-[400px]" : "max-h-0"}`}>
+        <div className="px-6 py-4 space-y-1">
           {navLinks.map((link) =>
-            link.children ? (
-              link.children.map((child) => (
-                <Link
-                  key={child.href}
-                  href={child.href}
-                  onClick={() => setMobileOpen(false)}
-                  className="block px-4 py-3 text-slate hover:text-teal text-sm rounded-lg hover:bg-cream"
-                >
-                  {child.label}
-                </Link>
-              ))
-            ) : (
-              <Link
-                key={link.label}
-                href={link.href!}
-                onClick={() => setMobileOpen(false)}
-                className="block px-4 py-3 text-slate hover:text-teal text-sm rounded-lg hover:bg-cream"
-              >
+            link.children ? link.children.map((child) => (
+              <Link key={child.href} href={child.href} onClick={() => setMobileOpen(false)} className="block px-3 py-2.5 text-gray-600 hover:text-teal text-[15px] rounded-xl hover:bg-cream">
+                {child.label}
+              </Link>
+            )) : (
+              <Link key={link.label} href={link.href!} onClick={() => setMobileOpen(false)} className="block px-3 py-2.5 text-gray-600 hover:text-teal text-[15px] rounded-xl hover:bg-cream">
                 {link.label}
               </Link>
             )
           )}
-          <Link
-            href="/outils"
-            onClick={() => setMobileOpen(false)}
-            className="block text-center mt-4 px-6 py-3 bg-teal text-white font-semibold text-sm rounded-full"
-          >
-            Diagnostic Gratuit
+          <Link href="/outils" onClick={() => setMobileOpen(false)} className="block text-center mt-3 px-5 py-2.5 bg-teal text-white text-[14px] font-semibold rounded-xl">
+            Diagnostic gratuit
           </Link>
         </div>
       </div>

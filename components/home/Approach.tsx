@@ -3,77 +3,46 @@
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
 
 const steps = [
-  {
-    number: "01",
-    title: "Évaluation",
-    description:
-      "Diagnostic documenté des contraintes, usages et objectifs de l'entreprise. Audit complet de l'existant.",
-    icon: "🔍",
-  },
-  {
-    number: "02",
-    title: "Sécurisation",
-    description:
-      "Conformité légale et financière, anticipation des risques réglementaires. Dairia Avocats intervient dès cette étape.",
-    icon: "🛡️",
-  },
-  {
-    number: "03",
-    title: "Optimisation",
-    description:
-      "Réduction absentéisme, simplification des dispositifs, performance mesurable. Pilotage sur preuves.",
-    icon: "📈",
-  },
+  { n: "01", title: "Évaluation", text: "Diagnostic documenté de vos contraintes, usages et objectifs. Audit complet de l'existant.", color: "bg-teal" },
+  { n: "02", title: "Sécurisation", text: "Conformité légale et financière, anticipation des risques. Dairia Avocats intervient dès cette étape.", color: "bg-gold" },
+  { n: "03", title: "Optimisation", text: "Réduction absentéisme, simplification des dispositifs, performance mesurable et pilotée.", color: "bg-green" },
 ];
 
 export function Approach() {
   return (
-    <section className="py-32 relative overflow-hidden bg-cream">
-      <div className="max-w-7xl mx-auto px-6">
+    <section id="how" className="py-28 relative">
+      <div className="absolute inset-0 blob-green" />
+      <div className="relative max-w-6xl mx-auto px-6">
         <ScrollReveal>
-          <div className="text-center mb-20">
-            <span className="text-teal text-sm font-medium uppercase tracking-widest">
-              Notre méthode
-            </span>
-            <h2 className="font-heading text-4xl md:text-5xl font-bold mt-4 text-navy">
-              3 étapes vers la{" "}
-              <span className="gradient-text">sérénité.</span>
+          <div className="max-w-2xl mb-16">
+            <div className="pill bg-teal/5 text-teal border border-teal/10 mb-6">Méthode</div>
+            <h2 className="font-heading text-3xl md:text-[2.75rem] font-bold leading-tight text-navy">
+              3 étapes vers la sérénité.
             </h2>
           </div>
         </ScrollReveal>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 relative">
-          <div className="hidden md:block absolute top-12 left-[16%] right-[16%] h-px bg-gradient-to-r from-teal/20 via-gold/20 to-teal/20" />
-
-          {steps.map((step, i) => (
-            <ScrollReveal key={step.number} delay={i * 0.2}>
-              <div className="text-center relative">
-                <div className="inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-teal text-white mb-8 relative z-10 hover:scale-105 transition-transform">
-                  <span className="text-3xl">{step.icon}</span>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          {steps.map((s, i) => (
+            <ScrollReveal key={s.n} delay={i * 0.12}>
+              <div className="bento p-8 h-full">
+                <div className={`w-10 h-10 ${s.color} rounded-xl flex items-center justify-center text-white font-bold text-sm mb-6`}>
+                  {s.n}
                 </div>
-                <div className="text-teal/40 font-heading text-sm font-bold mb-2">
-                  {step.number}
-                </div>
-                <h3 className="font-heading text-2xl font-bold mb-4 text-navy">
-                  {step.title}
-                </h3>
-                <p className="text-slate leading-relaxed">
-                  {step.description}
-                </p>
+                <h3 className="font-heading text-xl font-bold text-navy mb-3">{s.title}</h3>
+                <p className="text-gray-600 text-[15px] leading-relaxed">{s.text}</p>
               </div>
             </ScrollReveal>
           ))}
         </div>
 
-        <ScrollReveal delay={0.6}>
-          <div className="mt-20 card rounded-2xl p-8 text-center">
-            <p className="text-slate text-lg">
-              <span className="text-teal font-semibold">
-                Pilotage sur preuves :
-              </span>{" "}
-              indicateurs socle, tableaux de bord, plans d&apos;action à l&apos;alerte —
-              cap sur sécurité juridique, qualité de service et performance
-              économique.
+        <ScrollReveal delay={0.4}>
+          <div className="mt-8 bento p-6 flex items-center gap-4">
+            <div className="w-10 h-10 bg-cream-warm rounded-xl flex items-center justify-center text-teal shrink-0">
+              <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+            </div>
+            <p className="text-gray-600 text-[15px]">
+              <span className="font-semibold text-navy">Pilotage sur preuves :</span> indicateurs socle, tableaux de bord, plans d&apos;action — cap sur sécurité juridique et performance économique.
             </p>
           </div>
         </ScrollReveal>

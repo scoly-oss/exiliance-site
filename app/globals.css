@@ -1,20 +1,25 @@
 @import "tailwindcss";
 
 @theme inline {
-  --color-navy: #0A1628;
-  --color-navy-light: #0F1F35;
-  --color-navy-lighter: #152842;
-  --color-teal: #1D3557;
-  --color-teal-light: #2A4A6B;
-  --color-gold: #D4960A;
-  --color-gold-light: #F5A623;
-  --color-orange: #DF6A41;
-  --color-cream: #FDFBF7;
-  --color-cream-dim: #F3F0EA;
-  --color-slate: #4A5568;
-  --color-slate-light: #718096;
-  --color-green: #7CB890;
-  --color-red: #D4727A;
+  --color-navy: #0C1B2A;
+  --color-navy-light: #162A3E;
+  --color-teal: #1B4965;
+  --color-teal-light: #256D8A;
+  --color-indigo: #3D5AFE;
+  --color-gold: #E8A838;
+  --color-gold-light: #F5C563;
+  --color-orange: #F08C4A;
+  --color-cream: #FAFAF8;
+  --color-cream-warm: #F5F3EF;
+  --color-white: #FFFFFF;
+  --color-gray-50: #F8F8F6;
+  --color-gray-100: #EDEDEB;
+  --color-gray-200: #D8D8D4;
+  --color-gray-400: #9C9C96;
+  --color-gray-600: #5C5C58;
+  --color-gray-800: #2A2A28;
+  --color-green: #2AA79C;
+  --color-red: #E05252;
   --font-heading: "Playfair Display", Georgia, serif;
   --font-body: "Inter", system-ui, sans-serif;
 }
@@ -25,61 +30,78 @@ html {
 
 body {
   background: var(--color-cream);
-  color: var(--color-navy);
+  color: var(--color-gray-800);
   font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
 }
 
 ::selection {
-  background: var(--color-gold);
+  background: var(--color-teal);
   color: white;
 }
 
-/* Scrollbar */
-::-webkit-scrollbar {
-  width: 6px;
-}
-::-webkit-scrollbar-track {
-  background: var(--color-cream-dim);
-}
-::-webkit-scrollbar-thumb {
-  background: var(--color-teal-light);
-  border-radius: 3px;
-}
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--color-cream); }
+::-webkit-scrollbar-thumb { background: var(--color-gray-200); border-radius: 3px; }
 
-/* Gradient text utility */
+/* Gradient text */
 .gradient-text {
-  background: linear-gradient(135deg, var(--color-teal), var(--color-gold));
+  background: linear-gradient(135deg, var(--color-teal), var(--color-teal-light));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
-/* Card style for light theme */
+/* Cards — Alan-style with big radius + subtle shadow */
 .card {
-  background: white;
-  border: 1px solid rgba(10, 22, 40, 0.06);
-  box-shadow: 0 1px 3px rgba(10, 22, 40, 0.04), 0 8px 24px rgba(10, 22, 40, 0.03);
+  background: var(--color-white);
+  border-radius: 20px;
+  border: 1px solid var(--color-gray-100);
+  transition: all 0.25s ease;
 }
-
 .card:hover {
-  box-shadow: 0 4px 12px rgba(10, 22, 40, 0.08), 0 16px 40px rgba(10, 22, 40, 0.06);
-  border-color: rgba(212, 150, 10, 0.2);
+  box-shadow: 0 8px 30px rgba(12, 27, 42, 0.06);
+  border-color: var(--color-gray-200);
 }
 
-/* Glass on dark sections */
-.glass-dark {
-  background: rgba(15, 31, 53, 0.6);
-  backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+/* Bento card variants */
+.bento {
+  background: var(--color-white);
+  border-radius: 24px;
+  border: 1px solid var(--color-gray-100);
+  overflow: hidden;
+  transition: all 0.25s ease;
+}
+.bento:hover {
+  box-shadow: 0 12px 40px rgba(12, 27, 42, 0.08);
+  transform: translateY(-2px);
 }
 
-/* Glow effect */
-.glow-gold {
-  box-shadow: 0 0 40px rgba(212, 150, 10, 0.1);
+/* Organic gradient blobs */
+.blob-teal {
+  background: radial-gradient(ellipse at 30% 50%, rgba(27, 73, 101, 0.06) 0%, transparent 70%);
+}
+.blob-gold {
+  background: radial-gradient(ellipse at 70% 50%, rgba(232, 168, 56, 0.05) 0%, transparent 70%);
+}
+.blob-green {
+  background: radial-gradient(ellipse at 50% 30%, rgba(42, 167, 156, 0.04) 0%, transparent 70%);
 }
 
-/* Section dark (footer, hero accents) */
+/* Section backgrounds */
 .section-dark {
   background: var(--color-navy);
   color: var(--color-cream);
+}
+
+/* Pill badge */
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 16px;
+  border-radius: 100px;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
 }
