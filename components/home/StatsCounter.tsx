@@ -12,10 +12,10 @@ const stats = [
 
 export function StatsCounter() {
   return (
-    <section className="py-24 relative">
+    <section className="py-24 relative bg-cream">
       <div className="max-w-7xl mx-auto px-6">
         <ScrollReveal>
-          <div className="glass rounded-3xl p-12 md:p-16">
+          <div className="bg-teal rounded-3xl p-12 md:p-16">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12">
               {stats.map((stat) => (
                 <AnimatedCounter
@@ -23,6 +23,7 @@ export function StatsCounter() {
                   end={stat.end}
                   suffix={stat.suffix}
                   label={stat.label}
+                  light
                 />
               ))}
             </div>

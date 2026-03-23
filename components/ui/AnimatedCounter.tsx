@@ -8,6 +8,7 @@ interface AnimatedCounterProps {
   prefix?: string;
   duration?: number;
   label: string;
+  light?: boolean;
 }
 
 export function AnimatedCounter({
@@ -16,6 +17,7 @@ export function AnimatedCounter({
   prefix = "",
   duration = 2,
   label,
+  light = false,
 }: AnimatedCounterProps) {
   const ref = useRef<HTMLDivElement>(null);
   const [count, setCount] = useState(0);
@@ -60,12 +62,18 @@ export function AnimatedCounter({
         visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
       }`}
     >
-      <div className="font-heading text-4xl md:text-5xl font-bold gradient-text">
+      <div
+        className={`font-heading text-4xl md:text-5xl font-bold ${
+          light ? "text-white" : "text-teal"
+        }`}
+      >
         {prefix}
         {count}
         {suffix}
       </div>
-      <p className="mt-2 text-cream/50 text-sm">{label}</p>
+      <p className={`mt-2 text-sm ${light ? "text-white/60" : "text-slate"}`}>
+        {label}
+      </p>
     </div>
   );
 }

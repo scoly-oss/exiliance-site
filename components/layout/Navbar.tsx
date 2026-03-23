@@ -36,20 +36,22 @@ export function Navbar() {
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         mounted ? "translate-y-0 opacity-100" : "-translate-y-full opacity-0"
-      } ${scrolled ? "glass py-3" : "bg-transparent py-5"}`}
+      } ${
+        scrolled
+          ? "bg-white/80 backdrop-blur-xl shadow-sm py-3 border-b border-navy/5"
+          : "bg-transparent py-5"
+      }`}
     >
       <nav className="max-w-7xl mx-auto px-6 flex items-center justify-between">
-        {/* Logo */}
         <Link href="/" className="flex items-center gap-3 group">
-          <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-gold to-orange flex items-center justify-center font-heading text-navy font-bold text-xl">
+          <div className="w-10 h-10 rounded-lg bg-teal flex items-center justify-center font-heading text-white font-bold text-xl">
             E
           </div>
-          <span className="font-heading text-xl font-bold text-cream group-hover:text-gold transition-colors">
+          <span className="font-heading text-xl font-bold text-navy group-hover:text-teal transition-colors">
             Exiliance
           </span>
         </Link>
 
-        {/* Desktop Nav */}
         <div className="hidden lg:flex items-center gap-8">
           {navLinks.map((link) =>
             link.children ? (
@@ -59,26 +61,19 @@ export function Navbar() {
                 onMouseEnter={() => setDropdownOpen(true)}
                 onMouseLeave={() => setDropdownOpen(false)}
               >
-                <button className="text-cream/70 hover:text-gold transition-colors text-sm font-medium flex items-center gap-1">
+                <button className="text-slate hover:text-teal transition-colors text-sm font-medium flex items-center gap-1">
                   {link.label}
                   <svg
-                    className={`w-4 h-4 transition-transform ${
-                      dropdownOpen ? "rotate-180" : ""
-                    }`}
+                    className={`w-4 h-4 transition-transform ${dropdownOpen ? "rotate-180" : ""}`}
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
                   >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M19 9l-7 7-7-7"
-                    />
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                   </svg>
                 </button>
                 <div
-                  className={`absolute top-full left-0 mt-2 w-64 glass rounded-xl p-2 transition-all duration-200 ${
+                  className={`absolute top-full left-0 mt-2 w-64 bg-white rounded-xl shadow-lg border border-navy/5 p-2 transition-all duration-200 ${
                     dropdownOpen
                       ? "opacity-100 translate-y-0 pointer-events-auto"
                       : "opacity-0 translate-y-2 pointer-events-none"
@@ -88,7 +83,7 @@ export function Navbar() {
                     <Link
                       key={child.href}
                       href={child.href}
-                      className="block px-4 py-3 rounded-lg text-sm text-cream/70 hover:text-gold hover:bg-white/5 transition-all"
+                      className="block px-4 py-3 rounded-lg text-sm text-slate hover:text-teal hover:bg-cream transition-all"
                     >
                       {child.label}
                     </Link>
@@ -99,7 +94,7 @@ export function Navbar() {
               <Link
                 key={link.label}
                 href={link.href!}
-                className="text-cream/70 hover:text-gold transition-colors text-sm font-medium"
+                className="text-slate hover:text-teal transition-colors text-sm font-medium"
               >
                 {link.label}
               </Link>
@@ -107,17 +102,13 @@ export function Navbar() {
           )}
           <Link
             href="/outils"
-            className="ml-4 px-6 py-2.5 bg-gradient-to-r from-gold to-orange text-navy font-semibold text-sm rounded-full hover:shadow-lg hover:shadow-gold/20 transition-all hover:scale-105"
+            className="ml-4 px-6 py-2.5 bg-teal text-white font-semibold text-sm rounded-full hover:bg-teal-light hover:shadow-lg hover:shadow-teal/10 transition-all hover:scale-105"
           >
             Diagnostic Gratuit
           </Link>
         </div>
 
-        {/* Mobile toggle */}
-        <button
-          className="lg:hidden text-cream"
-          onClick={() => setMobileOpen(!mobileOpen)}
-        >
+        <button className="lg:hidden text-navy" onClick={() => setMobileOpen(!mobileOpen)}>
           <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             {mobileOpen ? (
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -128,10 +119,9 @@ export function Navbar() {
         </button>
       </nav>
 
-      {/* Mobile menu */}
       <div
-        className={`lg:hidden glass mt-2 mx-4 rounded-xl overflow-hidden transition-all duration-300 ${
-          mobileOpen ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"
+        className={`lg:hidden bg-white shadow-lg mt-2 mx-4 rounded-xl overflow-hidden transition-all duration-300 border border-navy/5 ${
+          mobileOpen ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0 border-0"
         }`}
       >
         <div className="p-4 space-y-2">
@@ -142,7 +132,7 @@ export function Navbar() {
                   key={child.href}
                   href={child.href}
                   onClick={() => setMobileOpen(false)}
-                  className="block px-4 py-3 text-cream/70 hover:text-gold text-sm rounded-lg hover:bg-white/5"
+                  className="block px-4 py-3 text-slate hover:text-teal text-sm rounded-lg hover:bg-cream"
                 >
                   {child.label}
                 </Link>
@@ -152,7 +142,7 @@ export function Navbar() {
                 key={link.label}
                 href={link.href!}
                 onClick={() => setMobileOpen(false)}
-                className="block px-4 py-3 text-cream/70 hover:text-gold text-sm rounded-lg hover:bg-white/5"
+                className="block px-4 py-3 text-slate hover:text-teal text-sm rounded-lg hover:bg-cream"
               >
                 {link.label}
               </Link>
@@ -161,7 +151,7 @@ export function Navbar() {
           <Link
             href="/outils"
             onClick={() => setMobileOpen(false)}
-            className="block text-center mt-4 px-6 py-3 bg-gradient-to-r from-gold to-orange text-navy font-semibold text-sm rounded-full"
+            className="block text-center mt-4 px-6 py-3 bg-teal text-white font-semibold text-sm rounded-full"
           >
             Diagnostic Gratuit
           </Link>
