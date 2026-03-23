@@ -90,51 +90,25 @@ export default function IFC() {
       />
 
       {/* Pricing section */}
-      <section className="py-16 bg-white">
-        <div className="max-w-5xl mx-auto px-6">
+      <section className="py-20">
+        <div className="max-w-6xl mx-auto px-6">
           <ScrollReveal>
-            <div className="text-center mb-12">
-              <span className="text-teal text-sm font-medium uppercase tracking-widest">
-                Tarification
-              </span>
-              <h2 className="font-heading text-3xl md:text-4xl font-bold mt-4 text-navy">
-                Transparente et prévisible
-              </h2>
+            <div className="max-w-2xl mb-14">
+              <div className="pill bg-green/8 text-green border border-green/15 mb-6">Tarification</div>
+              <h2 className="font-heading text-3xl md:text-[2.5rem] font-bold leading-tight text-navy">Transparente et prévisible</h2>
             </div>
           </ScrollReveal>
           <ScrollReveal>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               {[
-                {
-                  label: "TPE",
-                  detail: "< 100 salariés",
-                  price: "3 000€ HT",
-                },
-                {
-                  label: "Groupe",
-                  detail: "< 150 salariés",
-                  price: "4 500€ HT",
-                  featured: true,
-                },
-                {
-                  label: "Sur-mesure",
-                  detail: "Au-delà",
-                  price: "300€/h",
-                },
+                { label: "TPE", detail: "< 100 salariés", price: "3 000€ HT" },
+                { label: "Groupe", detail: "< 150 salariés", price: "4 500€ HT", featured: true },
+                { label: "Sur-mesure", detail: "Au-delà", price: "300€/h" },
               ].map((plan) => (
-                <div
-                  key={plan.label}
-                  className={`card rounded-2xl p-8 text-center ${
-                    plan.featured ? "ring-2 ring-teal" : ""
-                  }`}
-                >
-                  <div className="text-sm font-medium text-teal uppercase tracking-wider mb-2">
-                    {plan.label}
-                  </div>
-                  <div className="text-slate text-sm mb-4">{plan.detail}</div>
-                  <div className="font-heading text-3xl font-bold text-navy">
-                    {plan.price}
-                  </div>
+                <div key={plan.label} className={`bento p-8 text-center ${plan.featured ? "ring-2 ring-teal" : ""}`}>
+                  <div className="text-[13px] font-semibold text-teal uppercase tracking-wider mb-2">{plan.label}</div>
+                  <div className="text-gray-600 text-[14px] mb-4">{plan.detail}</div>
+                  <div className="font-heading text-3xl font-bold text-navy">{plan.price}</div>
                 </div>
               ))}
             </div>

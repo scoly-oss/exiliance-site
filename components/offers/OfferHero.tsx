@@ -12,45 +12,26 @@ interface OfferHeroProps {
   ctaHref?: string;
 }
 
-export function OfferHero({
-  icon,
-  title,
-  subtitle,
-  description,
-  ctaText = "Lancer un diagnostic",
-  ctaHref = "/outils",
-}: OfferHeroProps) {
-  const [visible, setVisible] = useState(false);
-  useEffect(() => {
-    setTimeout(() => setVisible(true), 200);
-  }, []);
+export function OfferHero({ icon, title, subtitle, description, ctaText = "Lancer un diagnostic", ctaHref = "/outils" }: OfferHeroProps) {
+  const [v, setV] = useState(false);
+  useEffect(() => { setTimeout(() => setV(true), 150); }, []);
 
   return (
-    <section className="relative pt-32 pb-20 overflow-hidden bg-cream">
-      <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] rounded-full bg-teal/5 blur-[150px]" />
-      <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] rounded-full bg-gold/5 blur-[120px]" />
-
-      <div
-        className={`relative z-10 max-w-4xl mx-auto px-6 text-center transition-all duration-700 ${
-          visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-        }`}
-      >
-        <div className="text-5xl mb-6">{icon}</div>
-        <span className="text-teal text-sm font-medium uppercase tracking-widest">
-          {subtitle}
-        </span>
-        <h1 className="font-heading text-4xl md:text-6xl font-bold mt-4 mb-6 text-navy">
-          {title}
-        </h1>
-        <p className="text-slate text-lg max-w-2xl mx-auto mb-10 leading-relaxed">
-          {description}
-        </p>
-        <Link
-          href={ctaHref}
-          className="inline-block px-8 py-4 bg-teal text-white font-bold rounded-full hover:bg-teal-light hover:shadow-xl hover:shadow-teal/10 transition-all hover:scale-105"
-        >
-          {ctaText} →
-        </Link>
+    <section className="relative pt-28 pb-16 overflow-hidden">
+      <div className="absolute inset-0 blob-teal" />
+      <div className="absolute inset-0 blob-gold" />
+      <div className={`relative z-10 max-w-6xl mx-auto px-6 transition-all duration-700 ${v ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>
+        <div className="max-w-2xl">
+          <div className="pill bg-teal/5 text-teal border border-teal/10 mb-6">
+            <span className="text-xl">{icon}</span>
+            {subtitle}
+          </div>
+          <h1 className="font-heading text-[clamp(2rem,4vw,3.5rem)] font-bold leading-[1.1] text-navy mb-5">{title}</h1>
+          <p className="text-gray-600 text-lg leading-relaxed mb-8 max-w-xl">{description}</p>
+          <Link href={ctaHref} className="inline-flex px-7 py-3.5 bg-teal text-white font-semibold rounded-2xl text-[15px] hover:bg-teal-light hover:shadow-lg hover:shadow-teal/10 transition-all">
+            {ctaText} →
+          </Link>
+        </div>
       </div>
     </section>
   );
