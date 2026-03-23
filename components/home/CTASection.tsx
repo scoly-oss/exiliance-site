@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import { motion } from "framer-motion";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
 
 export function CTASection() {
@@ -26,17 +25,12 @@ export function CTASection() {
               détaillé offert.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <motion.div
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
+              <Link
+                href="/outils"
+                className="inline-block px-10 py-5 bg-gradient-to-r from-gold to-orange text-navy font-bold rounded-full text-lg hover:shadow-2xl hover:shadow-gold/30 transition-all hover:scale-105 active:scale-95"
               >
-                <Link
-                  href="/outils"
-                  className="inline-block px-10 py-5 bg-gradient-to-r from-gold to-orange text-navy font-bold rounded-full text-lg hover:shadow-2xl hover:shadow-gold/30 transition-all"
-                >
-                  Lancer le diagnostic gratuit →
-                </Link>
-              </motion.div>
+                Lancer le diagnostic gratuit →
+              </Link>
               <Link
                 href="/contact"
                 className="px-10 py-5 glass text-cream/80 font-medium rounded-full text-lg hover:text-gold transition-all"

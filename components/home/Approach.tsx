@@ -1,7 +1,6 @@
 "use client";
 
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
-import { motion } from "framer-motion";
 
 const steps = [
   {
@@ -52,12 +51,9 @@ export function Approach() {
           {steps.map((step, i) => (
             <ScrollReveal key={step.number} delay={i * 0.2}>
               <div className="text-center relative">
-                <motion.div
-                  whileHover={{ scale: 1.05 }}
-                  className="inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-gradient-to-br from-gold to-orange mb-8 relative z-10"
-                >
+                <div className="inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-gradient-to-br from-gold to-orange mb-8 relative z-10 hover:scale-105 transition-transform">
                   <span className="text-3xl">{step.icon}</span>
-                </motion.div>
+                </div>
                 <div className="text-gold/40 font-heading text-sm font-bold mb-2">
                   {step.number}
                 </div>

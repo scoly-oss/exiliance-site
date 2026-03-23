@@ -1,7 +1,32 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useState, useEffect } from "react";
 import Link from "next/link";
+
+function FadeIn({
+  children,
+  delay = 0,
+  className = "",
+}: {
+  children: React.ReactNode;
+  delay?: number;
+  className?: string;
+}) {
+  const [visible, setVisible] = useState(false);
+  useEffect(() => {
+    const t = setTimeout(() => setVisible(true), delay * 1000);
+    return () => clearTimeout(t);
+  }, [delay]);
+  return (
+    <div
+      className={`transition-all duration-700 ease-out ${
+        visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+      } ${className}`}
+    >
+      {children}
+    </div>
+  );
+}
 
 export function Hero() {
   return (
@@ -25,46 +50,30 @@ export function Hero() {
 
       {/* Content */}
       <div className="relative z-10 max-w-5xl mx-auto px-6 text-center">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className="mb-6"
-        >
+        <FadeIn delay={0.2} className="mb-6">
           <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass text-xs font-medium text-gold uppercase tracking-widest">
             <span className="w-2 h-2 bg-gold rounded-full animate-pulse" />
             Courtage & Conseil en Assurance de Personnes
           </span>
-        </motion.div>
+        </FadeIn>
 
-        <motion.h1
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-          className="font-heading text-5xl md:text-7xl lg:text-8xl font-bold leading-[0.95] mb-8"
-        >
-          La protection sociale
-          <br />
-          <span className="gradient-text">ne se subit plus.</span>
-        </motion.h1>
+        <FadeIn delay={0.4}>
+          <h1 className="font-heading text-5xl md:text-7xl lg:text-8xl font-bold leading-[0.95] mb-8">
+            La protection sociale
+            <br />
+            <span className="gradient-text">ne se subit plus.</span>
+          </h1>
+        </FadeIn>
 
-        <motion.p
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.6 }}
-          className="text-lg md:text-xl text-cream/60 max-w-2xl mx-auto mb-12 leading-relaxed"
-        >
-          Elle devient un système pilotable, sûr et lisible — où risque, budget
-          et conformité s&apos;alignent au service de vos collaborateurs et de votre
-          performance.
-        </motion.p>
+        <FadeIn delay={0.6}>
+          <p className="text-lg md:text-xl text-cream/60 max-w-2xl mx-auto mb-12 leading-relaxed">
+            Elle devient un système pilotable, sûr et lisible — où risque, budget
+            et conformité s&apos;alignent au service de vos collaborateurs et de votre
+            performance.
+          </p>
+        </FadeIn>
 
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.8 }}
-          className="flex flex-col sm:flex-row items-center justify-center gap-4"
-        >
+        <FadeIn delay={0.8} className="flex flex-col sm:flex-row items-center justify-center gap-4">
           <Link
             href="/outils"
             className="group px-8 py-4 bg-gradient-to-r from-gold to-orange text-navy font-bold rounded-full text-base hover:shadow-xl hover:shadow-gold/20 transition-all hover:scale-105"
@@ -80,38 +89,24 @@ export function Hero() {
           >
             Découvrir notre approche
           </Link>
-        </motion.div>
+        </FadeIn>
 
         {/* Trust badges */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1, delay: 1.2 }}
-          className="mt-20 flex items-center justify-center gap-8 text-cream/30 text-xs"
-        >
+        <FadeIn delay={1.2} className="mt-20 flex items-center justify-center gap-8 text-cream/30 text-xs">
           <span>ORIAS 17002631</span>
           <span className="w-1 h-1 bg-cream/20 rounded-full" />
           <span>Service France Garantie</span>
           <span className="w-1 h-1 bg-cream/20 rounded-full" />
           <span>Paris · Lyon</span>
-        </motion.div>
+        </FadeIn>
       </div>
 
       {/* Scroll indicator */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.5 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2"
-      >
-        <motion.div
-          animate={{ y: [0, 10, 0] }}
-          transition={{ duration: 2, repeat: Infinity }}
-          className="w-6 h-10 rounded-full border-2 border-cream/20 flex items-start justify-center p-2"
-        >
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
+        <div className="w-6 h-10 rounded-full border-2 border-cream/20 flex items-start justify-center p-2">
           <div className="w-1 h-2 bg-gold rounded-full" />
-        </motion.div>
-      </motion.div>
+        </div>
+      </div>
     </section>
   );
 }

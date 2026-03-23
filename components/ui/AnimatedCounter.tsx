@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { motion, useInView } from "framer-motion";
 
 interface AnimatedCounterProps {
   end: number;
@@ -18,12 +17,28 @@ export function AnimatedCounter({
   duration = 2,
   label,
 }: AnimatedCounterProps) {
-  const ref = useRef(null);
-  const inView = useInView(ref, { once: true });
+  const ref = useRef<HTMLDivElement>(null);
   const [count, setCount] = useState(0);
+  const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    if (!inView) return;
+    const el = ref.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setVisible(true);
+          observer.unobserve(el);
+        }
+      },
+      { threshold: 0.3 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (!visible) return;
     let start = 0;
     const step = end / (duration * 60);
     const timer = setInterval(() => {
@@ -36,16 +51,14 @@ export function AnimatedCounter({
       }
     }, 1000 / 60);
     return () => clearInterval(timer);
-  }, [inView, end, duration]);
+  }, [visible, end, duration]);
 
   return (
-    <motion.div
+    <div
       ref={ref}
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.5 }}
-      className="text-center"
+      className={`text-center transition-all duration-500 ${
+        visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
+      }`}
     >
       <div className="font-heading text-4xl md:text-5xl font-bold gradient-text">
         {prefix}
@@ -53,6 +66,6 @@ export function AnimatedCounter({
         {suffix}
       </div>
       <p className="mt-2 text-cream/50 text-sm">{label}</p>
-    </motion.div>
+    </div>
   );
 }

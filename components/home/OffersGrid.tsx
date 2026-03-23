@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import { motion } from "framer-motion";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
 
 const offers = [
@@ -72,11 +71,7 @@ export function OffersGrid() {
               className={i === 4 ? "md:col-span-2 lg:col-span-1" : ""}
             >
               <Link href={offer.href} className="block group h-full">
-                <motion.div
-                  whileHover={{ y: -8 }}
-                  transition={{ duration: 0.3 }}
-                  className="h-full glass rounded-2xl p-8 hover:border-gold/20 transition-all duration-500 relative overflow-hidden"
-                >
+                <div className="h-full glass rounded-2xl p-8 hover:border-gold/20 transition-all duration-500 relative overflow-hidden hover:-translate-y-2">
                   {/* Hover gradient */}
                   <div
                     className={`absolute inset-0 bg-gradient-to-br ${offer.color} opacity-0 group-hover:opacity-5 transition-opacity duration-500`}
@@ -97,7 +92,7 @@ export function OffersGrid() {
                       </span>
                     </span>
                   </div>
-                </motion.div>
+                </div>
               </Link>
             </ScrollReveal>
           ))}

@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { motion, AnimatePresence } from "framer-motion";
 
 const navLinks = [
   {
@@ -24,23 +23,20 @@ export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    setMounted(true);
     const onScroll = () => setScrolled(window.scrollY > 50);
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   return (
-    <motion.header
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.6, ease: "easeOut" }}
+    <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        scrolled
-          ? "glass py-3"
-          : "bg-transparent py-5"
-      }`}
+        mounted ? "translate-y-0 opacity-100" : "-translate-y-full opacity-0"
+      } ${scrolled ? "glass py-3" : "bg-transparent py-5"}`}
     >
       <nav className="max-w-7xl mx-auto px-6 flex items-center justify-between">
         {/* Logo */}
@@ -81,27 +77,23 @@ export function Navbar() {
                     />
                   </svg>
                 </button>
-                <AnimatePresence>
-                  {dropdownOpen && (
-                    <motion.div
-                      initial={{ opacity: 0, y: 10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: 10 }}
-                      transition={{ duration: 0.2 }}
-                      className="absolute top-full left-0 mt-2 w-64 glass rounded-xl p-2"
+                <div
+                  className={`absolute top-full left-0 mt-2 w-64 glass rounded-xl p-2 transition-all duration-200 ${
+                    dropdownOpen
+                      ? "opacity-100 translate-y-0 pointer-events-auto"
+                      : "opacity-0 translate-y-2 pointer-events-none"
+                  }`}
+                >
+                  {link.children.map((child) => (
+                    <Link
+                      key={child.href}
+                      href={child.href}
+                      className="block px-4 py-3 rounded-lg text-sm text-cream/70 hover:text-gold hover:bg-white/5 transition-all"
                     >
-                      {link.children.map((child) => (
-                        <Link
-                          key={child.href}
-                          href={child.href}
-                          className="block px-4 py-3 rounded-lg text-sm text-cream/70 hover:text-gold hover:bg-white/5 transition-all"
-                        >
-                          {child.label}
-                        </Link>
-                      ))}
-                    </motion.div>
-                  )}
-                </AnimatePresence>
+                      {child.label}
+                    </Link>
+                  ))}
+                </div>
               </div>
             ) : (
               <Link
@@ -137,49 +129,44 @@ export function Navbar() {
       </nav>
 
       {/* Mobile menu */}
-      <AnimatePresence>
-        {mobileOpen && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            className="lg:hidden glass mt-2 mx-4 rounded-xl overflow-hidden"
-          >
-            <div className="p-4 space-y-2">
-              {navLinks.map((link) =>
-                link.children ? (
-                  link.children.map((child) => (
-                    <Link
-                      key={child.href}
-                      href={child.href}
-                      onClick={() => setMobileOpen(false)}
-                      className="block px-4 py-3 text-cream/70 hover:text-gold text-sm rounded-lg hover:bg-white/5"
-                    >
-                      {child.label}
-                    </Link>
-                  ))
-                ) : (
-                  <Link
-                    key={link.label}
-                    href={link.href!}
-                    onClick={() => setMobileOpen(false)}
-                    className="block px-4 py-3 text-cream/70 hover:text-gold text-sm rounded-lg hover:bg-white/5"
-                  >
-                    {link.label}
-                  </Link>
-                )
-              )}
+      <div
+        className={`lg:hidden glass mt-2 mx-4 rounded-xl overflow-hidden transition-all duration-300 ${
+          mobileOpen ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"
+        }`}
+      >
+        <div className="p-4 space-y-2">
+          {navLinks.map((link) =>
+            link.children ? (
+              link.children.map((child) => (
+                <Link
+                  key={child.href}
+                  href={child.href}
+                  onClick={() => setMobileOpen(false)}
+                  className="block px-4 py-3 text-cream/70 hover:text-gold text-sm rounded-lg hover:bg-white/5"
+                >
+                  {child.label}
+                </Link>
+              ))
+            ) : (
               <Link
-                href="/outils"
+                key={link.label}
+                href={link.href!}
                 onClick={() => setMobileOpen(false)}
-                className="block text-center mt-4 px-6 py-3 bg-gradient-to-r from-gold to-orange text-navy font-semibold text-sm rounded-full"
+                className="block px-4 py-3 text-cream/70 hover:text-gold text-sm rounded-lg hover:bg-white/5"
               >
-                Diagnostic Gratuit
+                {link.label}
               </Link>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </motion.header>
+            )
+          )}
+          <Link
+            href="/outils"
+            onClick={() => setMobileOpen(false)}
+            className="block text-center mt-4 px-6 py-3 bg-gradient-to-r from-gold to-orange text-navy font-semibold text-sm rounded-full"
+          >
+            Diagnostic Gratuit
+          </Link>
+        </div>
+      </div>
+    </header>
   );
 }
